@@ -153,3 +153,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 .weights
+.DS_Store
+/LPD/Licence_plate_detection/lapi.weights
