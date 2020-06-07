@@ -4,7 +4,7 @@ from skimage import measure
 from skimage.measure import regionprops
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
-import DetectPlate
+from . import DetectPlate
 
 # The invert was done so as to convert the black pixel to white pixel and vice versa
 for lp in DetectPlate.plate_like_objects:
@@ -44,5 +44,5 @@ for lp in DetectPlate.plate_like_objects:
 
             # this is just to keep track of the arrangement of the characters
             column_list.append(x0)
-    #print(characters)
+    # print(characters)
     plt.show()
