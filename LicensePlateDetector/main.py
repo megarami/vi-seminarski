@@ -5,8 +5,8 @@ from PIL import Image, ImageTk
 from tkinter import *
 from tkinter import filedialog
 
-from LicensePlateDetector.PredictCharacters import predict_license_plate_number
-from LicensePlateDetector.TrainRecognizeCharacters import train
+from PredictCharacters import predict_license_plate_number
+from TrainRecognizeCharacters import train
 
 dir_name = 'output'
 if not os.path.exists(dir_name):

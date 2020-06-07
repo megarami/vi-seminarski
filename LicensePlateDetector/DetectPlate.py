@@ -80,7 +80,7 @@ def detect_plate(image_url):
         counter = counter + 1
 
         # print(plate_like_objects[0])
-        plt.show()
+        #plt.show()
 
     # if(flag==0):
     min_height, max_height, min_width, max_width = plate_dimensions2

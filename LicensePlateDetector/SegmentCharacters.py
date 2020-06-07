@@ -6,7 +6,9 @@ from skimage import measure
 from skimage.measure import regionprops
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
-from LicensePlateDetector import DetectPlate
+
+import DetectPlate
+
 
 def segment_characters(image_url):
     characters_array = []

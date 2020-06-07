@@ -1,6 +1,6 @@
 import pickle
 
-from LicensePlateDetector import SegmentCharacters
+import SegmentCharacters
 
 
 def predict_license_plate_number(image_url):
