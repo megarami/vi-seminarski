@@ -3,12 +3,12 @@ import numpy as np
 from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score
 from skimage.io import imread
-from skimage.filters import threshold_otsu
+from skimage.filters import threshold_mean
 
 letters = [
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
             'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T',
-            'U', 'V', 'W', 'X', 'Y', 'Z'
+            'U', 'V', 'X', 'W', 'Y', 'Z'
         ]
 
 def read_training_data(training_directory):
@@ -16,11 +16,13 @@ def read_training_data(training_directory):
     target_data = []
     for each_letter in letters:
         for each in range(10):
+            if each_letter =='N' and each>1:
+                break
             image_path = os.path.join(training_directory, each_letter, each_letter + '_' + str(each) + '.jpg')
             # read each image of each character
             img_details = imread(image_path, as_gray=True)
             # converts each character image to binary image
-            binary_image = img_details < threshold_otsu(img_details)
+            binary_image = img_details < threshold_mean(img_details)
             # the 2D array of each image is flattened because the machine learning
             # classifier requires that each sample is a 1D array
             # therefore the 20*20 image becomes 1*400
