@@ -18,7 +18,7 @@ def detect_plate(image_url):
     counter = counter + 1
 
     # ax2.imshow(gray_car_image, cmap="gray")
-    plt.show()
+    # plt.show()
 
     # CCA (finding connected regions) of binary image
 
@@ -121,5 +121,5 @@ def detect_plate(image_url):
         # print(plate_like_objects[0])
     plt.savefig(f"output/output_{counter}.png", bbox_inches='tight', pad_inches=0, dpi=200)
 
-    plt.show()
+    # plt.show()
     return plate_like_objects
