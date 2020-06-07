@@ -6,11 +6,18 @@ from tkinter import *
 from tkinter import filedialog
 
 from LicensePlateDetector.PredictCharacters import predict_license_plate_number
+from LicensePlateDetector.TrainRecognizeCharacters import train
 
-filelist = [f for f in os.listdir('output') if f.endswith(".png")]
-for f in filelist:
-    os.remove(os.path.join('output', f))
+dir_name = 'output'
+if not os.path.exists(dir_name):
+    os.makedirs(dir_name)
+else:
+    filelist = [f for f in os.listdir(dir_name) if f.endswith(".png")]
+    for f in filelist:
+        os.remove(os.path.join(dir_name, f))
 
+if not os.path.exists('finalized_model.sav'):
+    train()
 
 def nove_dimenzije(dimenzije):
     sirina = dimenzije[0]
