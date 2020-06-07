@@ -1,8 +1,9 @@
 from skimage.io import imread
-from skimage.filters import threshold_otsu
+from skimage.filters import threshold_otsu, threshold_yen, threshold_local, threshold_isodata, threshold_minimum, \
+    threshold_mean
 import matplotlib.pyplot as plt
 
-filename = './slika1.png'
+filename = './slika5.jpg'
 
 import cv2
 cap = cv2.VideoCapture(filename)
@@ -25,7 +26,7 @@ cv2.destroyAllWindows()
 import imutils
 #car_image = imread("./output/frame%d.jpg"%(count-1), as_gray=True)
 #car_image = imutils.rotate(car_image, 270)
-car_image = imread("test.jpg", as_gray=True)
+car_image = imread("slika2.jpg", as_gray=True)
 # it should be a 2 dimensional array
 # print(car_image.shape)
 
@@ -34,14 +35,14 @@ car_image = imread("test.jpg", as_gray=True)
 # will make it range between 0 & 255 (something we can relate better with
 
 gray_car_image = car_image * 255
-gray_car_image = imutils.rotate(gray_car_image, 350)
+#gray_car_image = imutils.rotate(gray_car_image, 350)
 fig, (ax1, ax2) = plt.subplots(1, 2)
 ax1.imshow(gray_car_image, cmap="gray")
-threshold_value = threshold_otsu(gray_car_image)
+threshold_value = threshold_mean(gray_car_image)
 binary_car_image = gray_car_image > threshold_value
 # print(binary_car_image)
 ax2.imshow(binary_car_image, cmap="gray")
-# ax2.imshow(gray_car_image, cmap="gray")
+#ax2.imshow(gray_car_image, cmap="gray")
 plt.show()
 
 # CCA (finding connected regions) of binary image
@@ -60,16 +61,16 @@ print(label_image.shape) #width of car img
 # getting the maximum width, height and minimum width and height that a license plate can be
 plate_dimensions = (0.01*label_image.shape[0], 0.08*label_image.shape[0], 0.1*label_image.shape[1], 0.3*label_image.shape[1])
 plate_dimensions2 = (0.08*label_image.shape[0], 0.95*label_image.shape[0], 0.15*label_image.shape[1], 0.95*label_image.shape[1])
-min_height, max_height, min_width, max_width = plate_dimensions
+min_height, max_height, min_width, max_width = plate_dimensions2
 plate_objects_cordinates = []
 plate_like_objects = []
 
 fig, (ax1) = plt.subplots(1)
-ax1.imshow(gray_car_image, cmap="gray")
+ax1.imshow(binary_car_image, cmap="gray")
 flag =0
 # regionprops creates a list of properties of all the labelled regions
 for region in regionprops(label_image):
-    # print(region)
+    #print(region)
     if region.area < 50:
         #if the region is so small then it's likely not a license plate
         continue
